@@ -1,18 +1,14 @@
 'use strict';
 
-/**
- *  article controller
- */
-
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::article.article', ({ strapi }) => ({
-    // Find one article
+module.exports = createCoreController('api::users.users', ({ strapi }) => ({
+    // Find one user
     async findOne(ctx) {
         const { id } = ctx.params;
-        const entity = await strapi.db.query('api::article.article').findOne({
+        const entity = await strapi.db.query('api::user.user').findOne({
             where: { id },
-            populate: ['author']
+            populate: ['user']
         });
         return entity;
     },
@@ -22,10 +18,16 @@ module.exports = createCoreController('api::article.article', ({ strapi }) => ({
         const { user } = ctx.state;
         const data = {
             ...ctx.request.body.data,
-            user: user.id
+            user: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            password: user.password,
+            status: user.status,
+
         };
         
-        const entity = await strapi.db.query('api::article.article').create({
+        const entity = await strapi.db.query('api::user.user').create({
             data
         });
         return entity;
@@ -34,17 +36,17 @@ module.exports = createCoreController('api::article.article', ({ strapi }) => ({
     // Update article
     async update(ctx) {
         const { id } = ctx.params;
-        const entity = await strapi.db.query('api::article.article').update({
+        const entity = await strapi.db.query('api::user.user').update({
             where: { id },
             data: ctx.request.body.data
         });
         return entity;
     },
 
-    // Delete article
+    // Delete user
     async delete(ctx) {
         const { id } = ctx.params;
-        const entity = await strapi.db.query('api::article.article').delete({
+        const entity = await strapi.db.query('api::user.user').delete({
             where: { id }
         });
         return entity;
