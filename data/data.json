@@ -1,16 +1,16 @@
 {
   "global": {
-    "siteName": "Strapi Blog",
+    "siteName": "",
     "defaultSeo": {
-      "metaTitle": "Page",
-      "metaDescription": "A blog made with Strapi",
+      "metaTitle": "",
+      "metaDescription": "",
       "shareImage": null
     },
-    "siteDescription": "A Blog made with Strapi",
+    "siteDescription": "",
     "favicon": null
   },
   "about": {
-    "title": "About the strapi blog",
+    "title": "",
     "blocks": [
       {
         "__component": "shared.quote",
@@ -29,50 +29,80 @@
   },
   "categories": [
     {
+      "category_id": 1,
       "name": "news",
       "slug": "news"
     },
     {
+      "category_id": 2,
       "name": "tech",
       "slug": "tech"
     },
     {
+      "category_id": 3,
       "name": "food",
       "slug": "food"
     },
     {
+      "category_id": 4,
       "name": "nature",
       "slug": "nature"
     },
     {
+      "category_id": 5,
       "name": "story",
       "slug": "story"
     }
   ],
-  "authors": [
+
+  "users": [
     {
-      "name": "David Doe",
+      "user_id": 1,
+      "username": "David Doe",
       "email": "daviddoe@strapi.io",
-      "avatar": "daviddoe@strapi.io.jpg"
+      "avatar": "daviddoe@strapi.io.jpg",
+      "password": "password",
+      "role": "admin",
+      "bio": "David Doe is a software engineer at Strapi. He loves to code and write about tech.",
+      "date_joined": "2021-01-01",
+      "last_login": "2021-01-01",
+      "is_active": true
     },
     {
-      "name": "Sarah Baker",
+      "user_id": 2,
+      "username": "Sarah Baker",
       "email": "sarahbaker@strapi.io",
-      "avatar": "sarahbaker@strapi.io.jpg"
+      "avatar": "sarahbaker@strapi.io.jpg",
+      "password": "password",
+      "role": "author",
+      "bio": "Sarah Baker is a software engineer at Strapi. She loves to code and write about tech.",
+      "date_joined": "2021-01-01",
+      "last_login": "2021-01-01",
+      "is_active": true
     }
   ],
+
   "articles": [
     {
+      "article_id": 1,
       "title": "The internet's Own boy",
       "slug": "the-internet-s-own-boy",
-      "category": {
-        "id": 5
-      },
-      "author": {
-        "id": 1
-      },
-      "description": "Follow the story of Aaron Swartz, the boy who could change the world",
+      "category_id": 1,
+      "user_id": 1,
+      "content": "Follow the story of Aaron Swartz, the boy who could change the world",
       "cover": null,
+      "published_at": "2021-01-01",
+      "updated_at": "2021-01-01",
+      "status": "published",
+      "views": 100,
+      "likes": 100,
+      "shares": 100,
+      "comments_count": 100,
+      "seo_metadata": {
+        "meta_title": "The internet's Own boy",
+        "meta_description": "Follow the story of Aaron Swartz, the boy who could change the world",
+        "share_image": null
+      },
       "blocks": [
         {
           "__component": "shared.rich-text",
@@ -98,16 +128,25 @@
       ]
     },
     {
+      "article_id": 2,
       "title": "This shrimp is awesome",
       "slug": "this-shrimp-is-awesome",
-      "category": {
-        "id": 4
-      },
-      "author": {
-        "id": 1
-      },
-      "description": "Mantis shrimps, or stomatopods, are marine crustaceans of the order Stomatopoda.",
+      "category_id": 2,
+      "user_id": 1,
+      "content": "Mantis shrimps, or stomatopods, are marine crustaceans of the order Stomatopoda.",
       "cover": null,
+      "published_at": "2021-01-01",
+      "updated_at": "2021-01-01",
+      "status": "published",
+      "views": 100,
+      "likes": 100,
+      "shares": 100,
+      "comments_count": 100,
+      "seo_metadata": {
+        "meta_title": "This shrimp is awesome",
+        "meta_description": "Mantis shrimps, or stomatopods, are marine crustaceans of the order Stomatopoda.",
+        "share_image": null
+      },
       "blocks": [
         {
           "__component": "shared.rich-text",
@@ -133,16 +172,25 @@
       ]
     },
     {
+      "article_id": 3,
       "title": "A bug is becoming a meme on the internet",
       "slug": "a-bug-is-becoming-a-meme-on-the-internet",
-      "category": {
-        "id": 2
-      },
-      "author": {
-        "id": 2
-      },
-      "description": "How a bug on MySQL is becoming a meme on the internet",
+      "category_id": 2,
+      "user_id": 1,
+      "content": "How a bug on MySQL is becoming a meme on the internet",
       "cover": null,
+      "published_at": "2021-01-01",
+      "updated_at": "2021-01-01",
+      "status": "published",
+      "views": 100,
+      "likes": 100,
+      "shares": 100,
+      "comments_count": 100,
+      "seo_metadata": {
+        "meta_title": "A bug is becoming a meme on the internet",
+        "meta_description": "How a bug on MySQL is becoming a meme on the internet",
+        "share_image": null
+      },
       "blocks": [
         {
           "__component": "shared.rich-text",
@@ -168,16 +216,25 @@
       ]
     },
     {
+      "article_id": 4,
       "title": "Beautiful picture",
       "slug": "beautiful-picture",
-      "category": {
-        "id": 4
-      },
-      "author": {
-        "id": 2
-      },
-      "description": "Description of a beautiful picture",
+      "category_id": 4,
+      "user_id": 1,
+      "content": "Description of a beautiful picture",
       "cover": null,
+      "published_at": "2021-01-01",
+      "updated_at": "2021-01-01",
+      "status": "published",
+      "views": 100,
+      "likes": 100,
+      "shares": 100,
+      "comments_count": 100,
+      "seo_metadata": {
+        "meta_title": "Beautiful picture",
+        "meta_description": "Description of a beautiful picture",
+        "share_image": null
+      },
       "blocks": [
         {
           "__component": "shared.rich-text",
@@ -203,16 +260,25 @@
       ]
     },
     {
+      "article_id": 5,
       "title": "What's inside a Black Hole",
       "slug": "what-s-inside-a-black-hole",
-      "category": {
-        "id": 1
-      },
-      "author": {
-        "id": 2
-      },
-      "description": "Maybe the answer is in this article, or not...",
+      "category_id": 1,
+      "user_id": 2,
+      "content": "Maybe the answer is in this article, or not...",
       "cover": null,
+      "published_at": "2021-01-01",
+      "updated_at": "2021-01-01",
+      "status": "published",
+      "views": 100,
+      "likes": 100,
+      "shares": 100,
+      "comments_count": 100,
+      "seo_metadata": {
+        "meta_title": "What's inside a Black Hole",
+        "meta_description": "Maybe the answer is in this article, or not...",
+        "share_image": null
+      },
       "blocks": [
         {
           "__component": "shared.rich-text",
@@ -236,6 +302,39 @@
           "files": ["coffee-art.jpg", "coffee-beans.jpg"]
         }
       ]
+    }
+  ],
+  "comments": [
+    {
+      "comment_id": 1,
+      "blog_id": 1,
+      "user_id": 1,
+      "content": "This is a comment",
+      "timestamp": "2021-01-01"
+    }
+  ],
+  "editors": [
+    {
+      "editor_id": 1,
+      "user_id": 1,
+      "blog_id": 1,
+      "timestamp": "2021-01-01",
+      "status": "published"
+    }
+  ],
+  "analytics": [
+    {
+      "analytics_id": 1,
+      "blog_id": 1,
+      "views": 100
+    }
+  ],
+  "interactions": [
+    {
+      "interaction_id": 1,
+      "blog_id": 1,
+      "user_id": 1,
+      "type": "like"
     }
   ]
 }

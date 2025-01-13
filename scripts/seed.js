@@ -2,39 +2,14 @@
 
 const fs = require('fs-extra');
 const path = require('path');
-const mime = require('mime-types');
-const { categories, authors, articles, global, about } = require('../data/data.json');
+const mime = require('mime-types'); 
+const { categories, users, articles, global, about } = require('../data/data.json');
 
-async function seedExampleApp() {
-  const shouldImportSeedData = await isFirstRun();
+/** @typedef {Object.<string, string[]>} Permissions */
 
-  if (shouldImportSeedData) {
-    try {
-      console.log('Setting up the template...');
-      await importSeedData();
-      console.log('Ready to go');
-    } catch (error) {
-      console.log('Could not import seed data');
-      console.error(error);
-    }
-  } else {
-    console.log(
-      'Seed data has already been imported. We cannot reimport unless you clear your database first.'
-    );
-  }
-}
-
-async function isFirstRun() {
-  const pluginStore = strapi.store({
-    environment: strapi.config.environment,
-    type: 'type',
-    name: 'setup',
-  });
-  const initHasRun = await pluginStore.get({ key: 'initHasRun' });
-  await pluginStore.set({ key: 'initHasRun', value: true });
-  return !initHasRun;
-}
-
+/**
+ * @param {Permissions} newPermissions
+ */
 async function setPublicPermissions(newPermissions) {
   // Find the ID of the public role
   const publicRole = await strapi.query('plugin::users-permissions.role').findOne({
@@ -89,7 +64,7 @@ async function uploadFile(file, name) {
       files: file,
       data: {
         fileInfo: {
-          alternativeText: `An image uploaded to Strapi called ${name}`,
+          alternativeText: `${name}`,
           caption: name,
           name,
         },
@@ -179,6 +154,14 @@ async function importArticles() {
         blocks: updatedBlocks,
         // Make sure it's not a draft
         publishedAt: Date.now(),
+        user: article.user_id,
+        category: article.category_id,
+        seoMetadata: article.seo_metadata,
+        status: article.status,
+        views: article.views,
+        likes: article.likes,
+        shares: article.shares,
+        commentsCount: article.comments_count,
       },
     });
   }
@@ -222,15 +205,24 @@ async function importCategories() {
   }
 }
 
-async function importAuthors() {
-  for (const author of authors) {
-    const avatar = await checkFileExistsBeforeUpload([author.avatar]);
+async function importUsers() {
+  for (const user of users) {
+    const avatar = await checkFileExistsBeforeUpload([user.avatar]);
 
     await createEntry({
-      model: 'author',
+      model: 'user',
       entry: {
-        ...author,
+        ...user,
         avatar,
+        role: user.role,
+        bio: user.bio,
+        dateJoined: user.date_joined,
+        lastLogin: user.last_login,
+        isActive: user.is_active,
+        password: user.password,
+        email: user.email,
+        username: user.username,
+        
       },
     });
   }
@@ -248,7 +240,7 @@ async function importSeedData() {
 
   // Create all entries
   await importCategories();
-  await importAuthors();
+  await importUsers();
   await importArticles();
   await importGlobal();
   await importAbout();
@@ -262,7 +254,7 @@ async function main() {
 
   app.log.level = 'error';
 
-  await seedExampleApp();
+  await importSeedData();
   await app.destroy();
 
   process.exit(0);
