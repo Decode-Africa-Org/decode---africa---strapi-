@@ -19,7 +19,7 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
         const { id } = ctx.params;
         const entity = await strapi.db.query('api::category.category').findOne({
             where: { id },
-            populate: ['author']
+            //populate: ['author']
         });
         return entity;
     },
