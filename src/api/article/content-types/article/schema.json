@@ -41,6 +41,12 @@
       "target": "api::category.category",
       "inversedBy": "articles"
     },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tags.tags",
+      "inversedBy": "articles"
+    },
     "blocks": {
       "type": "dynamiczone",
       "components": ["shared.media", "shared.quote", "shared.rich-text", "shared.slider"]

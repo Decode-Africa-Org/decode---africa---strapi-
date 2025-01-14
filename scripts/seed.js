@@ -72,7 +72,6 @@ async function uploadFile(file, name) {
     });
 }
 
-// Create an entry and attach files if there are any
 async function createEntry({ model, entry }) {
   try {
     // Actually create the entry in Strapi

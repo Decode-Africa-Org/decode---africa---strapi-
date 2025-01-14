@@ -35,3 +35,31 @@ module.exports = ({ env }) => {
     },
   };
 };
+
+// 
+
+
+// const config = {
+//   DATABASE_URL: process.env.DATABASE_URL,
+//   DB_HOST: process.env.DB_HOST || 'localhost',
+//   DB_PORT: process.env.DB_PORT || 5432,
+//   DB_USER: process.env.DB_USER || 'decodeafrica',
+//   DB_NAME: process.env.DB_NAME || 'decodeafrica',
+//   DB_PASSWORD: process.env.DB_PASSWORD,
+//   DB_SSL: process.env.DB_SSL === 'true'
+// };
+
+// const knex = require('knex')({
+//   client: 'pg',
+//   connection: {
+//     connectionString: config.DATABASE_URL,
+//     host: config.DB_HOST,
+//     port: Number(config.DB_PORT),
+//     user: config.DB_USER,
+//     database: config.DB_NAME,
+//     password: config.DB_PASSWORD,
+//     ssl: config.DB_SSL ? { rejectUnauthorized: false } : false,
+//   },
+// });
+
+// module.exports = knex;
