@@ -10,6 +10,7 @@ module.exports = {
             table.uuid('category_id').references('uuidColumn').inTable('categories');
             table.uuid('tag_id').references('uuidColumn').inTable('tags');
             table.timestamp('created_at', { useTz: true }).defaultTo(knex.fn.now());
+            table.timestamp('published_at', {useTx: true}).defaultTo(knex.fn.now())
             table.timestamp('updated_at', { useTz: true }).defaultTo(knex.fn.now());
         });
     },
