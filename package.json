@@ -24,6 +24,7 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
     "sequelize": "^6.37.5",
+    "strapi-plugin-generate-schema": "^0.0.1",
     "styled-components": "^6.0.0"
   },
   "engines": {

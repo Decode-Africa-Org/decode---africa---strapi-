@@ -1,4 +1,5 @@
 {
+  "autogenerate": "true",
   "compilerOptions": {
     "moduleResolution": "nodenext",
     "module": "NodeNext",

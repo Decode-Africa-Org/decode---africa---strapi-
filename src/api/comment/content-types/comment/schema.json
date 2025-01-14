@@ -24,7 +24,7 @@
     "user": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::users.users",
+      "target": "api::user.user",
       "inversedBy": "comment"
     }
   }
