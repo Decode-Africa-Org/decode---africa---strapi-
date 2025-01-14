@@ -7,6 +7,12 @@
 const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::article.article', ({ strapi }) => ({
+    //Find all article
+    async find(ctx) {
+        const entity = await strapi.db.query('api::article.article').findMany();
+        return entity;
+    },
+
     // Find one article
     async findOne(ctx) {
         const { id } = ctx.params;

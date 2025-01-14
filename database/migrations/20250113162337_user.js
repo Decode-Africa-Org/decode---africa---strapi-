@@ -1,6 +1,6 @@
 module.exports = {
         async up(knex)      {
-                await knex.schema.createTable('users', t => {
+                await knex.schema.createTable('user', t => {
                         t.uuid('uuidColumn', {primaryKey:true}).defaultTo(knex.fn.uuid());
                         t.string('firstName');
                         t.string('secondName');
@@ -12,12 +12,12 @@ module.exports = {
                         t.timestamp('date_joined', { useTz: true }).defaultTo(knex.fn.now());
                 });
 
-                await knex.schema.alterTable('users', t => {
+                await knex.schema.alterTable('user', t => {
                         t.unique('email').alter()
                 })
         },
-        
+
         async down(knex) {
-                await knex.schema.dropTableIfExists('users');  
+                await knex.schema.dropTableIfExists('user');  
         }
 }

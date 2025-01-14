@@ -5,7 +5,7 @@ const { createCoreController } = require('@strapi/strapi').factories;
 module.exports = createCoreController('api::comment.comment', ({strapi}) => ({
 
     // Find all comments
-    async find(ctx) {
+    async findMany(ctx) {
         const entity = await strapi.db.query('api::comment.comment').findMany();
         return entity;
     },
