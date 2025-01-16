@@ -31,26 +31,6 @@ module.exports = createCoreController('api::comments.comments', ({strapi}) => ({
             ctx.throw(400, "Unable to fetch comments", {error});
         }
     },
-
-    // Find one comment
-    async findOne(ctx) {
-        const { id } = ctx.params;
-        try {
-            const entity = await strapi.db.query('api::comments.comments').findOne({ 
-                where: { id },
-                populate: {user: true}
-            });
-
-            if (!entity) {
-                return ctx.notFound('Comment not found');
-            }
-
-            return {data: entity};
-        } catch (error) {
-            return ctx.throw(400, 'An error occurred', {error});
-        }
-    },
-
     // Create comment
     async create(ctx) {
         const {user} = ctx.state;

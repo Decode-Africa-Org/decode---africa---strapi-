@@ -47,5 +47,32 @@ module.exports = createCoreController('api::editor.editor', ({strapi}) => ({
         } catch (error) {
             ctx.throw(400, 'Error fetching the editor', {error})
         }
+    },
+
+    async create(ctx) {
+        const {id} = ctx.params;
+        const user = ctx.state;
+
+        //article will be sent to an editor for approval
+        // once it approved, the article is published
+        // editor can send a feedback to the arthour for improvement
+
+        try {
+            const data = { ...ctx.request.body?.data };
+
+            if(user.role.name !== 'editor') {
+                ctx.forbidden('Not allowed to approve the article');
+            }
+
+            if(data.status === 'draft') {
+                data.status === 'published';
+            }
+
+            const entity = ctx.strapi.query('api::editor.editor').crate({data});
+
+            return {data: entity};
+        } catch (error) {
+            return ctx.throw(400, 'Error approving the article', {error});
+        }
     }
 }))

@@ -31,25 +31,6 @@ module.exports = createCoreController('api::article.article', ({ strapi }) => ({
         }
     },
 
-    // Find one article
-    async findOne(ctx) {
-        const { id } = ctx.params;
-        try {
-            const entity = await strapi.db.query('api::article.article').findOne({
-                where: {id},
-                populate: {comment: true, interactions: true}
-            });
-
-            if(!entity) {
-                return ctx.notFound('Article not found');
-            }
-            
-            return {data: entity}
-        } catch (error) {
-            return ctx.throw(400, 'No comment found', {error})
-        }
-    },
-
     // Create article
     async create(ctx, next) {  
         const { user } = ctx.state;

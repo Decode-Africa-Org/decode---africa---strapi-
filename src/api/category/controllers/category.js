@@ -30,23 +30,6 @@ module.exports = createCoreController('api::category.category', ({ strapi }) => 
         }
     },
 
-    // Find one category
-    async findOne(ctx) {
-        const { id } = ctx.params;
-       
-        try {
-            const entity = await strapi.db.query('api::category.category').findOne({where: {id}});
-            
-            if (!entity)    {
-                return ctx.notFound('Category not found');
-            }
-
-            return entity;
-        } catch (error) {
-          return ctx.throw(400, 'Error finding the category', {error});  
-        }
-    },
-
     // Create category
     async create(ctx) {
         const {user} = ctx.state;
