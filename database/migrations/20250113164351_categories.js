@@ -3,9 +3,10 @@ module.exports={
         await knex.schema.createTable('categories', (table) => {
             table.uuid('uuidColumn', {primaryKey:true}).defaultTo(knex.fn.uuid());
             table.string('name');
+            table.text('discription');
         });
     },
     async down(knex)    {
-        knex.schema.dropTableIfExists('categories');
+        await knex.schema.dropTableIfExists('categories');
     }
 };

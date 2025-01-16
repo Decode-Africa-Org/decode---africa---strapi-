@@ -8,7 +8,7 @@ module.exports = createCoreController('api::user.user', ({ strapi }) => ({
     async findMany(ctx) {
         const {user} = ctx.state;
         if(!user || user.role.name !== 'admin') {
-            return ctx.return('Please log in to perform this search');
+            return ctx.badRequest('Please log in to perform this search');
         }
 
         try {
@@ -22,7 +22,6 @@ module.exports = createCoreController('api::user.user', ({ strapi }) => ({
                 orderBy: sort,
                 offset: (page - 1) * pageSize,
                 limit: pageSize,
-                populate: {comment: true, interactions: true}
             });
 
             const total = strapi.db.query('api::user.user').count({where: {filters}});
@@ -32,24 +31,28 @@ module.exports = createCoreController('api::user.user', ({ strapi }) => ({
                 meta: {page, pageSize, total}
             };
         } catch (error) {
-            ctx.throw(400, "No users found", {error});
+            ctx.internalServerError('An error occurred while fetching users');
         }
     },
 
     // Find one user
     async findOne(ctx) {
         const { id } = ctx.params;
-        const entity = await strapi.db.query('api::user.user').findOne({
-            where: { id },
-            populate: {comment: true, interactions: true}
-        });
         
-        //return 404 if no user
-        if (!entity){
-            return ctx.notFound('User not found');
+        try {
+            const entity = await strapi.db.query('api::user.user').findOne({
+                where: { id }
+            });
+            
+            //return 404 if no user
+            if (!entity){
+                return ctx.notFound('User not found');
+            }
+    
+            return {data: entity};
+        } catch (error) {
+            return ctx.internalServerError('An error occurred while fetching the user.')
         }
-
-        return {data: entity};
     },
 
     // Create article
@@ -74,7 +77,7 @@ module.exports = createCoreController('api::user.user', ({ strapi }) => ({
 
             return {data: {...entity, password: undefined}};
         } catch (error) {
-            return ctx.throw(400, 'User account creation failed', {error});
+            return ctx.internalServerError('Error while creating the account');
         }
     },
 
@@ -108,7 +111,7 @@ module.exports = createCoreController('api::user.user', ({ strapi }) => ({
 
             return {data: {...entity, password: undefined}};
         } catch (error) {
-            return ctx.throw(400, 'User update failed', {error});
+            return ctx.internalServerError('Error while making changes');
         }
     },
 
@@ -131,7 +134,7 @@ module.exports = createCoreController('api::user.user', ({ strapi }) => ({
             });
             return {message: "Account deletion completed successfully"};
         } catch (error) {
-            ctx.throw(400, 'Account deletion failed', {error});
+            ctx.internalServerError('Account deletion failed');
         }
     }
 }));

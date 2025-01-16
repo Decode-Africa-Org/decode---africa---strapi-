@@ -31,6 +31,23 @@ module.exports = createCoreController('api::article.article', ({ strapi }) => ({
         }
     },
 
+    //Get one article
+    async findOne(ctx)  {
+        const {id} = ctx.params;
+
+        try {
+            const entity = await strapi.db.query('api::aritcle.article').findOne({where: {id}});
+
+            if(!entity) {
+                return ctx.notFound('Discovery not found');
+            }
+
+            return {data: entity};
+        } catch (error) {
+            return ctx.throw(400, 'Error getting this dicovery', {error});
+        }
+    },
+
     // Create article
     async create(ctx, next) {  
         const { user } = ctx.state;
